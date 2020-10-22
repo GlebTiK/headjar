@@ -1,0 +1,16 @@
+[
+{
+  "modid": "headjar",
+  "name": "Head In A Jar",
+  "description": "It's about, well... I think that title explains everything",
+  "version": "1.0.0",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["GlebTiK"],
+  "credits": "TurtyWurty (YouTube) for tutorial + u/Vitaro99 (Reddit) for the idea!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

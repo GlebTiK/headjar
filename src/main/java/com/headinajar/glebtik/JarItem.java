@@ -4,12 +4,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
+import static com.headinajar.glebtik.JarProvider.JAR;
+
 public class JarItem extends Item
 {
     public JarItem() {
@@ -22,23 +23,18 @@ public class JarItem extends Item
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
     {
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
-        NBTTagCompound tag = (playerIn.isServerWorld()) ? playerIn.getServer().getEntityFromUuid(playerIn.getUniqueID()).getEntityData() : playerIn.getEntityData();
-        if (!tag.hasKey("isJar")) {
-            tag.setBoolean("isJar", true);
-            System.out.println(tag.getBoolean("isJar") + " just got it in jaritem after setting it to true cuz it does not exist");
-        }
-        System.out.println(tag.getBoolean("isJar") + " at start of jaritem");
-        if(tag.getBoolean("isJar")) {
-            tag.setBoolean("isJar", false);
-            System.out.println(tag.getBoolean("isJar") + " just got it in jaritem if is");
+        if (playerIn.world.isRemote) return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
+        IJar jar = playerIn.getCapability(JAR, null);
+        System.out.println("jar.isJar() rmb: " + jar.isJar());
+        if (jar.isJar() == 1) {
+            jar.setJar((byte) 0);
             return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-        } else if(!tag.getBoolean("isJar")) {
-            tag.setBoolean("isJar", true);
-            System.out.println(tag.getBoolean("isJar") + " just got it in jaritem if is not");
+        } else if (jar.isJar() == 0) {
+            jar.setJar((byte) 1);
             return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
         } else {
-            playerIn.sendStatusMessage(new TextComponentString("what the heck dude something went wrong"), true);
-            System.out.println(tag.getBoolean("isJar") + ": error");
+            jar.setJar((byte) 0);
+            System.out.println("what in the world of coding and why");
             return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
         }
     }

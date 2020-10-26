@@ -1,8 +1,7 @@
 package com.headinajar.glebtik;
 
 import com.headinajar.glebtik.util.Reference;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.EntityPlayer; 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -19,6 +18,7 @@ public class PlayerModeler {
     public void onPlayerRenderEvent(RenderPlayerEvent.Pre event) {
         PlayerModel model = new PlayerModel();
         IJar jar = event.getEntityPlayer().getCapability(JAR, null);
+        // event.getEntityPlayer().getServer().getEntityFromUuid(event.getEntityPlayer().getUniqueID()).getCapability(JAR, null);
         System.out.println("jar.isJar() PlayerModler: " + jar.isJar());
         if (jar.isJar() == 1) {
             event.setCanceled(true);

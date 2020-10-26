@@ -1,7 +1,5 @@
 package com.headinajar.glebtik;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -13,14 +11,14 @@ import net.minecraft.world.World;
 
 import static com.headinajar.glebtik.JarProvider.JAR;
 
-public class JarItem extends Item
+public class BodyItem extends Item
 {
     ItemStack item;
-    public JarItem() {
+    public BodyItem() {
         this.setMaxDamage(0);
         this.setHasSubtypes(false);
         this.setMaxStackSize(1);
-        this.setCreativeTab(CreativeTabs.MISC);
+        // this.setCreativeTab(CreativeTabs.MISC);
         item = new ItemStack(this);
     }
     public ItemStack getItem() {
@@ -33,13 +31,13 @@ public class JarItem extends Item
         // if (playerIn.world.isRemote) return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
         IJar jar = playerIn.getCapability(JAR, null);
         
-        System.out.println("jar.isJar() rmb: " + jar.isJar());
-        if (jar.isJar() == 1) {
-            jar.setJar((byte) 0);
-            playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, (new BodyItem()).getItem());
-            return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-        } else if (jar.isJar() == 0) {
+        System.out.println("jar.isJar() body rmb: " + jar.isJar());
+        if (jar.isJar() == 0) {
             jar.setJar((byte) 1);
+            playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, (new JarItem()).getItem());
+            return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+        } else if (jar.isJar() == 1) {
+            jar.setJar((byte) 0);
             return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
         } else {
             jar.setJar((byte) 0);

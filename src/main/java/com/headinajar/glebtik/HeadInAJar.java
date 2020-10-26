@@ -1,7 +1,5 @@
 package com.headinajar.glebtik;
 import com.headinajar.glebtik.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;

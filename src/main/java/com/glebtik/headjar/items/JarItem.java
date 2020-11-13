@@ -34,7 +34,6 @@ public class JarItem extends Item
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
     {
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
-        // if (playerIn.world.isRemote) return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
         IJar jar = playerIn.getCapability(JAR, null);
         
         System.out.println("jar.isJar() rmb: " + jar.isJar());
@@ -45,18 +44,13 @@ public class JarItem extends Item
                 PacketHandler.INSTANCE.sendToAll(msg);
             }
             System.out.println("set jar.isJar() to " + jar.isJar());
-            // playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, (new BodyItem()).getItem());
             return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-        } else if (!jar.isJar()) {
+        } else {
             jar.setJar(true);
             Message msg = new Message(jar.isJar(), playerIn.getUniqueID());
             if(!worldIn.isRemote)PacketHandler.INSTANCE.sendToAll(msg);
             System.out.println("set jar.isJar() to " + jar.isJar());
             return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-        } else {
-            jar.setJar(false);
-            System.out.println("what in the world of coding and why"); 
-            return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
         }
     }
 }

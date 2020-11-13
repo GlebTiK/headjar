@@ -10,8 +10,6 @@ public class Message implements IMessage {
     public boolean isJar;
     public UUID UniqueID;
     public UUID UniqueID2;
-    //public boolean joined;
-    //public boolean toClient;
 
     public Message() {
 
@@ -21,7 +19,6 @@ public class Message implements IMessage {
         type=1;
         isJar = j;
         UniqueID = u;
-        //toClient = b;
     }
 
     public Message(UUID u) {
@@ -33,7 +30,6 @@ public class Message implements IMessage {
         type=3;
         UniqueID = u;
         UniqueID2 = u2;
-        //toClient = b;
     }
 
     @Override
@@ -42,7 +38,6 @@ public class Message implements IMessage {
         if(type==1||type==3)isJar = buf.readByte() == 1;
         UniqueID = new UUID(buf.readLong(), buf.readLong());
         if(type==3)UniqueID2 = new UUID(buf.readLong(), buf.readLong());
-        //toClient = buf.readBoolean();
     }
 
     @Override
@@ -53,7 +48,6 @@ public class Message implements IMessage {
         buf.writeLong(UniqueID.getLeastSignificantBits());
         if(type==3)buf.writeLong(UniqueID2.getMostSignificantBits());
         if(type==3)buf.writeLong(UniqueID2.getLeastSignificantBits());
-        //buf.writeBoolean(toClient);
     }
 
 }

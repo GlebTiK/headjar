@@ -1,5 +1,6 @@
 package com.headinajar.glebtik;
 
+import com.headinajar.glebtik.capabilities.IJar;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTPrimitive;
 import net.minecraft.nbt.NBTTagByte;

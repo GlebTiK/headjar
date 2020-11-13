@@ -12,13 +12,11 @@ public class RenderHead extends RenderLivingBase<EntityLivingBase> {
     public RenderHead(RenderManager render, ResourceLocation texture) {
         super(render, new HeadModel(), 0.0F);
         textures = texture;
-        // System.out.println(textures.getResourceDomain());
     }
 
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityLivingBase EntityLivingBase) {
-//        return null;
         return textures;
     }
     

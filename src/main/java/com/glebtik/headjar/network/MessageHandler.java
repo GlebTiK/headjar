@@ -28,25 +28,9 @@ public class MessageHandler implements IMessageHandler<Message, IMessage> {
                 System.out.println("message=3, recieved, should send 1");
             }
         } else if (ctx.side == Side.CLIENT) {
-            // System.out.println("message.isjar: " + message.isJar);
-            // System.out.println("message.uuid: " + message.UniqueID);
             if (message.type == 1) {
-                // System.out.println("message=1, recieved, " + Minecraft
-                // .getMinecraft()
-                // .world
-                // .getPlayerEntityByUUID(
-                // message
-                // .UniqueID)
-                // .getName());
                 Minecraft.getMinecraft().addScheduledTask(() -> {
                     IJar cap;
-                    // if (message.type == 2) {
-                    // Message msg = new Message(Minecraft.getMinecraft().player.getCapability(JAR,
-                    // null).isJar(), Minecraft.getMinecraft().player.getUniqueID(), true, 1);
-                    // PacketHandler.INSTANCE.sendTo(msg, (EntityPlayerMP)
-                    // Minecraft.getMinecraft().world
-                    // .getPlayerEntityByUUID(message.UniqueID));
-                    // }
                     try {
                         cap = Minecraft.getMinecraft().world.getPlayerEntityByUUID(message.UniqueID).getCapability(JAR,
                                 null);

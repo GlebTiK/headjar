@@ -11,20 +11,12 @@ public class RenderJar extends RenderLivingBase<EntityLivingBase> {
 
     public RenderJar(RenderManager render) {
         super(render, new JarModel(), 0.0F);
-        // System.out.println(textures.getResourceDomain());
     }
 
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityLivingBase EntityLivingBase) {
-//        return null;
         return textures;
     }
-
-//    @Nullable
-//    @Override
-//    protected ResourceLocation getEntityTexture(Entity entity) {
-//        return null;
-//    }
 
 }

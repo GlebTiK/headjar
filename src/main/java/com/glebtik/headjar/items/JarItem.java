@@ -1,4 +1,4 @@
-package com.headinajar.glebtik;
+package com.glebtik.headjar.items;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,11 +11,15 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import static com.headinajar.glebtik.JarProvider.JAR;
+import static com.glebtik.headjar.capabilities.JarProvider.JAR;
+
+import com.glebtik.headjar.capabilities.IJar;
+import com.glebtik.headjar.network.Message;
+import com.glebtik.headjar.network.PacketHandler;
 
 public class JarItem extends Item
 {
-    ItemStack item;
+    private ItemStack item;
     public JarItem() {
         this.setMaxDamage(0);
         this.setHasSubtypes(false);
@@ -34,15 +38,23 @@ public class JarItem extends Item
         IJar jar = playerIn.getCapability(JAR, null);
         
         System.out.println("jar.isJar() rmb: " + jar.isJar());
-        if (jar.isJar() == 1) {
-            jar.setJar((byte) 0);
-            playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, (new BodyItem()).getItem());
+        if (jar.isJar()) {
+            jar.setJar(false);
+            Message msg = new Message(jar.isJar(), playerIn.getUniqueID());
+            if (!worldIn.isRemote) {
+                PacketHandler.INSTANCE.sendToAll(msg);
+            }
+            System.out.println("set jar.isJar() to " + jar.isJar());
+            // playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, (new BodyItem()).getItem());
             return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-        } else if (jar.isJar() == 0) {
-            jar.setJar((byte) 1);
-            return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
+        } else if (!jar.isJar()) {
+            jar.setJar(true);
+            Message msg = new Message(jar.isJar(), playerIn.getUniqueID());
+            if(!worldIn.isRemote)PacketHandler.INSTANCE.sendToAll(msg);
+            System.out.println("set jar.isJar() to " + jar.isJar());
+            return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
         } else {
-            jar.setJar((byte) 0);
+            jar.setJar(false);
             System.out.println("what in the world of coding and why"); 
             return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
         }

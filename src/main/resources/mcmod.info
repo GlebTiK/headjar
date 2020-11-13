@@ -1,14 +1,14 @@
 [
 {
-  "modid": "headjar",
-  "name": "Head In A Jar",
-  "description": "It's about, well... I think that title explains everything",
-  "version": "1.0.0",
-  "mcversion": "1.12.2",
+  "modid": "examplemod",
+  "name": "Example Mod",
+  "description": "Example placeholder mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["GlebTiK"],
-  "credits": "TurtyWurty (YouTube) for tutorial + u/Vitaro99 (Reddit) for the idea!",
+  "authorList": ["ExampleDude"],
+  "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

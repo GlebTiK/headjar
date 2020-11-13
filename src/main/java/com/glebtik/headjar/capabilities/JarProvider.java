@@ -1,4 +1,4 @@
-package com.headinajar.glebtik;
+package com.glebtik.headjar.capabilities;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

@@ -1,1 +1,1 @@
-gradlew build idea
+gradlew runClient

@@ -1,4 +1,4 @@
-package com.headinajar.glebtik.util;
+package com.glebtik.headjar.util;
 
 public class Reference {
     public static final String MOD_ID = "headjar";
@@ -6,6 +6,6 @@ public class Reference {
     public static final String MC_VERSION = "[1.12.2]";
     public static final String NAME = "Head In A Jar";
 
-    public static final String CLIENT_PROXY_CLASS = "com.headinajar.glebtik.proxy.ClientProxy";
-    public static final String COMMON_PROXY_CLASS = "com.headinajar.glebtik.proxy.CommonProxy";
+    public static final String CLIENT_PROXY_CLASS = "com.glebtik.headjar.proxy.ClientProxy";
+    public static final String COMMON_PROXY_CLASS = "com.glebtik.headjar.proxy.CommonProxy";
 }

@@ -1,8 +1,10 @@
 package com.glebtik.headjar.util;
 
+import com.glebtik.headjar.network.SetPlayerNBTMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -17,7 +19,6 @@ import com.glebtik.headjar.client.HeadModel;
 import com.glebtik.headjar.client.JarModel;
 import com.glebtik.headjar.client.RenderHead;
 import com.glebtik.headjar.client.RenderJar;
-import com.glebtik.headjar.network.Message;
 import com.glebtik.headjar.network.PacketHandler;
 
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;
@@ -102,11 +103,14 @@ public class Events {
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        Message msg = new Message(event.player.getUniqueID());
-        PacketHandler.INSTANCE.sendToAll(msg);
-        System.out.println("sent message 2");
-        msg = new Message(event.player.getCapability(JAR, null).isJar(), event.player.getUniqueID());
-        PacketHandler.INSTANCE.sendToAll(msg);
-        System.out.println("sent message 1");
+        //only fire on Server
+        if(event.player instanceof EntityPlayerMP) {
+            EntityPlayerMP serverPlayer = (EntityPlayerMP) event.player;
+            PacketHandler.INSTANCE.sendToAll(SetPlayerNBTMessage.create(serverPlayer));
+
+            for(EntityPlayerMP player: serverPlayer.getServer().getPlayerList().getPlayers()) {
+                PacketHandler.INSTANCE.sendTo(SetPlayerNBTMessage.create(player), serverPlayer);
+            }
+        }
     }
 }

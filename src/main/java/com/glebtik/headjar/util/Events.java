@@ -24,17 +24,12 @@ import com.glebtik.headjar.jars.IJar;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class Events {
-    private RenderJar renderer = null;
-    private RenderHead rendererHead = null;
+
+    public static final ResourceLocation JAR_LOC = new ResourceLocation(Reference.MOD_ID, "jar");
 
     @SubscribeEvent
     public void onPlayerRenderEvent(RenderPlayerEvent.Pre event) {
-        if (renderer == null) {
-            renderer = new RenderJar(event.getRenderer().getRenderManager());
-        }
-        if (rendererHead == null) {
-            rendererHead = new RenderHead(event.getRenderer().getRenderManager());
-        }
+
         EntityPlayer player = event.getEntityPlayer();
         IJarCapability jar = player.getCapability(JAR, null);
         event.setCanceled(!jar.getJar().shouldRenderPlayer());
@@ -49,8 +44,6 @@ public class Events {
 
         jar.updateHitbox(player);
     }
-
-    public static final ResourceLocation JAR_LOC = new ResourceLocation(Reference.MOD_ID, "jar");
 
     @SubscribeEvent
     public void attachCapability(AttachCapabilitiesEvent<Entity> event) {

@@ -1,7 +1,8 @@
 package com.glebtik.headjar;
 
-import com.glebtik.headjar.capabilities.IJar;
-import com.glebtik.headjar.capabilities.Jar;
+import com.glebtik.headjar.capabilities.IJarCapability;
+import com.glebtik.headjar.capabilities.JarCapability;
+import com.glebtik.headjar.jars.JarRegistry;
 import com.glebtik.headjar.capabilities.Storage;
 import com.glebtik.headjar.util.Events;
 import com.glebtik.headjar.items.JarItem;
@@ -11,6 +12,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -43,12 +45,15 @@ public class HeadInAJar {
         ModelLoader.setCustomModelResourceLocation(JarItem, JarItem.getItem().getMetadata(), location);
 
         ForgeRegistries.ITEMS.register(JarItem);
-        CapabilityManager.INSTANCE.register(IJar.class, new Storage(), Jar::new);
+        CapabilityManager.INSTANCE.register(IJarCapability.class, new Storage(), JarCapability::new);
         MinecraftForge.EVENT_BUS.register(new Events());
+        Loader.instance().getActiveModList().get(0).getMod();
+        JarRegistry.registerOwn();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        JarRegistry.lock();
     }
     @Mod.EventHandler
     public void Init(FMLInitializationEvent event) {

@@ -1,7 +1,9 @@
 package com.glebtik.headjar.items;
 
-import com.glebtik.headjar.capabilities.Jar;
-import com.glebtik.headjar.network.SetPlayerNBTMessage;
+import com.glebtik.headjar.jars.IJar;
+import com.glebtik.headjar.jars.HeadJar;
+import com.glebtik.headjar.jars.NoJar;
+import com.glebtik.headjar.network.SetPlayerJarMessage;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,20 +35,24 @@ public class JarItem extends Item {
 
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
         if(!worldIn.isRemote){
-            Jar jar = (Jar) playerIn.getCapability(JAR, null);
+            if(playerIn.getCapability(JAR, null).getJar() instanceof HeadJar){
+                playerIn.getCapability(JAR, null).setJar(new NoJar());
 
-            System.out.println("INFO: jar.isJar() rmb: " + jar.isJar());
+                SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) playerIn);
+                PacketHandler.INSTANCE.sendToAll(message);
+                return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+            }
+            if(playerIn.getCapability(JAR, null).getJar() instanceof NoJar){
+                playerIn.getCapability(JAR, null).setJar(new HeadJar());
 
-            jar.setJar(!jar.isJar());
+                SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) playerIn);
 
-            SetPlayerNBTMessage message = SetPlayerNBTMessage.create((EntityPlayerMP) playerIn);
-            PacketHandler.INSTANCE.sendToAll(message);
-
-            System.out.println("set jar.isJar() to " + jar.isJar());
-            return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+                PacketHandler.INSTANCE.sendToAll(message);
+                return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+            }
+            return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
         }else{
             return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
         }
-
     }
 }

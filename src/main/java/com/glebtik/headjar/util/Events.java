@@ -2,7 +2,6 @@ package com.glebtik.headjar.util;
 
 import com.glebtik.headjar.capabilities.IJarCapability;
 import com.glebtik.headjar.network.SetPlayerJarMessage;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +25,22 @@ import com.glebtik.headjar.jars.IJar;
 public class Events {
     private RenderJar renderer = null;
     private RenderHead rendererHead = null;
+
+    @SubscribeEvent
+    public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
+        if(event.getEntityPlayer() instanceof EntityPlayerMP) {
+            IJarCapability oldJarCap = event.getOriginal().getCapability(JAR, null);
+            IJarCapability newJarCap = event.getEntityPlayer().getCapability(JAR, null);
+            newJarCap.setJar(oldJarCap.getJar());
+            PacketHandler.INSTANCE.sendToAll(SetPlayerJarMessage.create((EntityPlayerMP) event.getEntityPlayer()));
+        }
+    }
+    @SubscribeEvent
+    public void onPlayerDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if(event.player instanceof EntityPlayerMP) {
+            PacketHandler.INSTANCE.sendToAll(SetPlayerJarMessage.create((EntityPlayerMP) event.player));
+        }
+    }
 
     @SubscribeEvent
     public void onPlayerRenderEvent(RenderPlayerEvent.Pre event) {

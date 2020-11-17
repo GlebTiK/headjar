@@ -4,6 +4,7 @@ import com.glebtik.headjar.capabilities.IJarCapability;
 import com.glebtik.headjar.capabilities.JarCapability;
 import com.glebtik.headjar.jars.JarRegistry;
 import com.glebtik.headjar.capabilities.Storage;
+import com.glebtik.headjar.register.ItemInit;
 import com.glebtik.headjar.util.Color;
 import com.glebtik.headjar.util.Events;
 import com.glebtik.headjar.items.JarItem;
@@ -26,7 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.NAME)
 public class HeadInAJar {
-    public static JarItem JarItem;
 
     @Mod.Instance
     public static HeadInAJar Instance;
@@ -40,13 +40,9 @@ public class HeadInAJar {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         PacketHandler.registerPacket();
-        JarItem = new JarItem(Color.BLANK);
-        ModelResourceLocation location = new ModelResourceLocation(Reference.MOD_ID + ":jar", "inventory");
-        ModelLoader.setCustomModelResourceLocation(JarItem, JarItem.getItem().getMetadata(), location);
-
-        ForgeRegistries.ITEMS.register(JarItem);
         CapabilityManager.INSTANCE.register(IJarCapability.class, new Storage(), JarCapability::new);
         MinecraftForge.EVENT_BUS.register(new Events());
+        MinecraftForge.EVENT_BUS.register(ItemInit.class);
         Loader.instance().getActiveModList().get(0).getMod();
         JarRegistry.registerOwn();
     }

@@ -3,6 +3,7 @@ package com.glebtik.headjar.network;
 import com.glebtik.headjar.jars.IJar;
 import com.glebtik.headjar.jars.HeadJar;
 import com.glebtik.headjar.jars.JarRegistry;
+import com.glebtik.headjar.util.Color;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.ResourceLocation;
 
@@ -43,5 +44,19 @@ public class MessageBufferUtils {
         buf.readBytes(pathBytes);
         String path = new String(pathBytes);
         return new ResourceLocation(domain, path);
+    }
+
+    public static void writeColor(ByteBuf buf, Color color) {
+        buf.writeInt(color.colorValue);
+    }
+
+    public static Color readColor(ByteBuf buf) {
+        int colorValue = buf.readInt();
+        for(Color color: Color.values()){
+            if(color.colorValue == colorValue) {
+                return color;
+            }
+        }
+        return Color.BLANK;
     }
 }

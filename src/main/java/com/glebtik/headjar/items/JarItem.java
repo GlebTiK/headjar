@@ -21,7 +21,7 @@ import com.glebtik.headjar.network.PacketHandler;
 
 public class JarItem extends Item {
     private ItemStack item;
-    private final Color color;
+    public final Color color;
     public JarItem(Color color) {
         this.setMaxDamage(0);
         this.setHasSubtypes(false);
@@ -49,7 +49,9 @@ public class JarItem extends Item {
                 return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
             }
             if(playerIn.getCapability(JAR, null).getJar() instanceof NoJar){
-                playerIn.getCapability(JAR, null).setJar(new HeadJar());
+                HeadJar jar = new HeadJar();
+                jar.setColor(((JarItem)itemStackIn.getItem()).color);
+                playerIn.getCapability(JAR, null).setJar(jar);
 
                 SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) playerIn);
 

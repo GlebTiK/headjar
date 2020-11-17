@@ -27,15 +27,6 @@ public class Events {
     private RenderHead rendererHead = null;
 
     @SubscribeEvent
-    public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
-        if(event.getEntityPlayer() instanceof EntityPlayerMP) {
-            IJarCapability oldJarCap = event.getOriginal().getCapability(JAR, null);
-            IJarCapability newJarCap = event.getEntityPlayer().getCapability(JAR, null);
-            newJarCap.setJar(oldJarCap.getJar());
-            PacketHandler.INSTANCE.sendToAll(SetPlayerJarMessage.create((EntityPlayerMP) event.getEntityPlayer()));
-        }
-    }
-    @SubscribeEvent
     public void onPlayerDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
         if(event.player instanceof EntityPlayerMP) {
             PacketHandler.INSTANCE.sendToAll(SetPlayerJarMessage.create((EntityPlayerMP) event.player));

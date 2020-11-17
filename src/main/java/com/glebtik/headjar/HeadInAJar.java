@@ -4,6 +4,7 @@ import com.glebtik.headjar.capabilities.IJarCapability;
 import com.glebtik.headjar.capabilities.JarCapability;
 import com.glebtik.headjar.jars.JarRegistry;
 import com.glebtik.headjar.capabilities.Storage;
+import com.glebtik.headjar.util.Color;
 import com.glebtik.headjar.util.Events;
 import com.glebtik.headjar.items.JarItem;
 import com.glebtik.headjar.network.PacketHandler;
@@ -39,8 +40,7 @@ public class HeadInAJar {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         PacketHandler.registerPacket();
-        JarItem = (JarItem) (new JarItem().setUnlocalizedName("jar"));
-        JarItem.setRegistryName("jar");
+        JarItem = new JarItem(Color.BLANK);
         ModelResourceLocation location = new ModelResourceLocation(Reference.MOD_ID + ":jar", "inventory");
         ModelLoader.setCustomModelResourceLocation(JarItem, JarItem.getItem().getMetadata(), location);
 

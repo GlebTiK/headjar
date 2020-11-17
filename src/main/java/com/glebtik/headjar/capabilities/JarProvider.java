@@ -8,10 +8,10 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class JarProvider implements ICapabilitySerializable<NBTBase>
 {
-    @CapabilityInject(IJar.class)
-    public static final Capability<IJar> JAR = null;
+    @CapabilityInject(IJarCapability.class)
+    public static final Capability<IJarCapability> JAR = null;
 
-    private IJar instance = JAR.getDefaultInstance();
+    private IJarCapability instance = JAR.getDefaultInstance();
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)

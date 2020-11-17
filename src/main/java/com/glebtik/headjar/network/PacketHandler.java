@@ -5,7 +5,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketHandler {
-    private static int ID = 1; //start with 1 so no collision happens with old messages
+    private static int ID = 0;
+
     private PacketHandler() {
 
     }
@@ -16,7 +17,7 @@ public class PacketHandler {
 
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("headjar");
     public static void registerPacket() {
-        INSTANCE.registerMessage(SetPlayerNBTMessage.class, SetPlayerNBTMessage.class, getID(), Side.CLIENT);
+        INSTANCE.registerMessage(SetPlayerJarMessage.class, SetPlayerJarMessage.class, getID(), Side.CLIENT);
     }
 }
 //

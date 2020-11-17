@@ -1,7 +1,7 @@
 package com.glebtik.headjar.network;
 
-import com.glebtik.headjar.capabilities.IJar;
-import com.glebtik.headjar.capabilities.Jar;
+import com.glebtik.headjar.jars.IJar;
+import com.glebtik.headjar.jars.HeadJar;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,12 +12,12 @@ import java.util.UUID;
 
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;
 
-public class SetPlayerNBTMessage extends AbstractMessage<SetPlayerNBTMessage> {
+public class SetPlayerJarMessage extends AbstractMessage<SetPlayerJarMessage> {
     //represent MessageType1 in Old System
-    private Jar jar;
+    private IJar jar;
     private UUID uuid;
-    public SetPlayerNBTMessage() {}
-    private SetPlayerNBTMessage(Jar jar, UUID uuid) {
+    public SetPlayerJarMessage() {}
+    private SetPlayerJarMessage(IJar jar, UUID uuid) {
         this.jar = jar;
         this.uuid = uuid;
     }
@@ -42,11 +42,9 @@ public class SetPlayerNBTMessage extends AbstractMessage<SetPlayerNBTMessage> {
     @Override
     protected IMessage handle(MessageContext ctx) {
         Minecraft.getMinecraft().addScheduledTask(() -> {
-            IJar cap;
             try {
-                cap = Minecraft.getMinecraft().world.getPlayerEntityByUUID(uuid).getCapability(JAR,
-                        null);
-                cap.copyInto(jar);
+                Minecraft.getMinecraft().world.getPlayerEntityByUUID(uuid).getCapability(JAR,
+                        null).setJar(jar);
             } catch (IllegalStateException e) {
                 System.out.println("ERROR: Capability was not attached to client player");
                 e.printStackTrace();
@@ -54,7 +52,7 @@ public class SetPlayerNBTMessage extends AbstractMessage<SetPlayerNBTMessage> {
         });
         return null;
     }
-    public static SetPlayerNBTMessage create(EntityPlayerMP player) {
-        return new SetPlayerNBTMessage((Jar)player.getCapability(JAR, null), player.getUniqueID());
+    public static SetPlayerJarMessage create(EntityPlayerMP player) {
+        return new SetPlayerJarMessage(player.getCapability(JAR, null).getJar(), player.getUniqueID());
     }
 }

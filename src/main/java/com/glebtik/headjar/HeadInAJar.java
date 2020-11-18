@@ -4,6 +4,7 @@ import com.glebtik.headjar.capabilities.IJarCapability;
 import com.glebtik.headjar.capabilities.JarCapability;
 import com.glebtik.headjar.jars.JarRegistry;
 import com.glebtik.headjar.capabilities.Storage;
+import com.glebtik.headjar.register.CraftingInit;
 import com.glebtik.headjar.register.ItemInit;
 import com.glebtik.headjar.util.Color;
 import com.glebtik.headjar.util.Events;
@@ -43,6 +44,7 @@ public class HeadInAJar {
         CapabilityManager.INSTANCE.register(IJarCapability.class, new Storage(), JarCapability::new);
         MinecraftForge.EVENT_BUS.register(new Events());
         MinecraftForge.EVENT_BUS.register(ItemInit.class);
+        MinecraftForge.EVENT_BUS.register(CraftingInit.class);
         Loader.instance().getActiveModList().get(0).getMod();
         JarRegistry.registerOwn();
     }

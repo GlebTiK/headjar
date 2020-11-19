@@ -4,15 +4,10 @@ import com.glebtik.headjar.capabilities.IJarCapability;
 import com.glebtik.headjar.capabilities.JarCapability;
 import com.glebtik.headjar.jars.JarRegistry;
 import com.glebtik.headjar.capabilities.Storage;
-import com.glebtik.headjar.register.CraftingInit;
 import com.glebtik.headjar.register.ItemInit;
-import com.glebtik.headjar.util.Color;
 import com.glebtik.headjar.util.Events;
-import com.glebtik.headjar.items.JarItem;
 import com.glebtik.headjar.network.PacketHandler;
 import com.glebtik.headjar.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Loader;
@@ -21,7 +16,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,7 +38,6 @@ public class HeadInAJar {
         CapabilityManager.INSTANCE.register(IJarCapability.class, new Storage(), JarCapability::new);
         MinecraftForge.EVENT_BUS.register(new Events());
         MinecraftForge.EVENT_BUS.register(ItemInit.class);
-        MinecraftForge.EVENT_BUS.register(CraftingInit.class);
         Loader.instance().getActiveModList().get(0).getMod();
         JarRegistry.registerOwn();
     }

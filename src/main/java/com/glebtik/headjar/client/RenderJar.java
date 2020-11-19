@@ -21,11 +21,8 @@ public class RenderJar extends RenderLivingBase<EntityLivingBase> {
 
     public void doRender(EntityLivingBase entity, double x, double y, double z, float entityYaw, float partialTicks, Color color) {
         updateEntityTexture(color);
-        GlStateManager.pushMatrix();
-        GlStateManager.enableBlend();
-        GlStateManager.depthMask(false);
+
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
-        GlStateManager.popMatrix();
     }
 
     @Nullable

@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "ggg",
+        "g g",
+        "ooo"
+    ],
+    "key":
+    {
+        "o":
+        {
+            "item": "minecraft:obsidian"
+        },
+        "g":
+        {
+            "item": "minecraft:stained_glass",
+            "data": 6
+        }
+    },
+    "result":
+    {
+        "item": "headjar:pink_jar",
+        "count": 1
+    }
+}

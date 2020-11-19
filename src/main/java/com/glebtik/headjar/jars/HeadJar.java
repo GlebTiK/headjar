@@ -73,7 +73,10 @@ public class HeadJar implements IJar {
         player.height = 0.75f;
         player.width = 0.7f;
         player.eyeHeight = 0.5f;
-        if(player.isRiding()) player.eyeHeight = 0.75f;
+        if(player.isRiding()) {
+            player.height = 1.23f;
+            player.eyeHeight = 0.75f;
+        }
 
     }
 }

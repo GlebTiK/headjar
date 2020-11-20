@@ -31,4 +31,5 @@ public class JarModel extends ModelBase {
 		bb_main.rotateAngleY = y;
 		bb_main.rotateAngleZ = z;
 	}
+
 }

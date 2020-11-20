@@ -1,6 +1,6 @@
 {
 	"parent": "headjar:item/abstract_jar",
 	"textures": {
-		"0": "headjar:items/jar"
+		"0": "headjar:items/orange_jar"
 	}
 }

@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "headjar:lime_jar"
+        }
+    ],
+    "result":
+    {
+        "item": "headjar:jar",
+        "count": 1
+    }
+}

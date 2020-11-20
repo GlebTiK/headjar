@@ -1,1 +1,17 @@
 item.jar.name=Jar
+item.white_jar.name=White Jar
+item.orange_jar.name=Orange Jar
+item.magenta_jar.name=Magenta Jar
+item.light_blue_jar.name=Light Blue Jar
+item.yellow_jar.name=Yellow Jar
+item.lime_jar.name=Lime Jar
+item.pink_jar.name=Pink Jar
+item.gray_jar.name=Gray Jar
+item.light_gray_jar.name=Light Gray Jar
+item.cyan_jar.name=Cyan Jar
+item.purple_jar.name=Purple Jar
+item.blue_jar.name=Blue Jar
+item.brown_jar.name=Brown Jar
+item.green_jar.name=Green Jar
+item.red_jar.name=Red Jar
+item.black_jar.name=Black Jar

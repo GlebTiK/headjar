@@ -4,6 +4,7 @@ import com.glebtik.headjar.jars.IJar;
 import com.glebtik.headjar.jars.HeadJar;
 import com.glebtik.headjar.jars.NoJar;
 import com.glebtik.headjar.network.SetPlayerJarMessage;
+import com.glebtik.headjar.util.Color;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,12 +21,17 @@ import com.glebtik.headjar.network.PacketHandler;
 
 public class JarItem extends Item {
     private ItemStack item;
-    public JarItem() {
+    public final Color color;
+    public JarItem(Color color) {
         this.setMaxDamage(0);
         this.setHasSubtypes(false);
         this.setMaxStackSize(1);
         this.setCreativeTab(CreativeTabs.MISC);
         item = new ItemStack(this);
+
+        setUnlocalizedName(color.prefix+"jar");
+        setRegistryName(color.prefix+"jar");
+        this.color = color;
     }
     public ItemStack getItem() {
         return item;
@@ -43,7 +49,9 @@ public class JarItem extends Item {
                 return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
             }
             if(playerIn.getCapability(JAR, null).getJar() instanceof NoJar){
-                playerIn.getCapability(JAR, null).setJar(new HeadJar());
+                HeadJar jar = new HeadJar();
+                jar.setColor(((JarItem)itemStackIn.getItem()).color);
+                playerIn.getCapability(JAR, null).setJar(jar);
 
                 SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) playerIn);
 

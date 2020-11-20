@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+         "item": "headjar:jar"
+        },
+        {
+            "type": "forge:ore_dict",
+            "ore": "dyeLime"
+        }
+    ],
+    "result":
+    {
+        "item": "headjar:lime_jar",
+        "count": 1
+    }
+}

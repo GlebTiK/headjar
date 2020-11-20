@@ -13,8 +13,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.Entity;
 import com.glebtik.headjar.capabilities.JarProvider;
-import com.glebtik.headjar.client.RenderHead;
-import com.glebtik.headjar.client.RenderJar;
 import com.glebtik.headjar.network.PacketHandler;
 
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;

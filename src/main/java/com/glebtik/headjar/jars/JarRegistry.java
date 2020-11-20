@@ -36,6 +36,7 @@ public class JarRegistry {
     public static void registerOwn() {
         register(new NoJar().getRegistryName(), NoJar::new);
         register(new HeadJar().getRegistryName(), HeadJar::new);
+        register(new IronGolemJar().getRegistryName(), IronGolemJar::new);
     }
 
     public static IJar getByRegistryName(ResourceLocation registryName) {

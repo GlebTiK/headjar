@@ -1,4 +1,4 @@
-package com.glebtik.headjar.client;
+package com.glebtik.headjar.client.render.head;
 
 // Made with Blockbench 3.6.6
 // Exported for Minecraft version 1.12

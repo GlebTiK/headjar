@@ -1,8 +1,7 @@
-package com.glebtik.headjar.client;
+package com.glebtik.headjar.client.render.head;
 
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;

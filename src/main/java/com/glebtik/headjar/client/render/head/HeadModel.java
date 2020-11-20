@@ -1,4 +1,4 @@
-package com.glebtik.headjar.client;
+package com.glebtik.headjar.client.render.head;
 
 
 import net.minecraft.client.model.ModelBase;

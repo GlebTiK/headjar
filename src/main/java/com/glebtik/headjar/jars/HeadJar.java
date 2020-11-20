@@ -80,6 +80,7 @@ public class HeadJar implements IJar {
 
     @Override
     public void updateHitbox(EntityPlayer player) {
+
         player.setEntityBoundingBox(new AxisAlignedBB(player.posX - 0.35, player.posY, player.posZ - 0.35, player.posX + 0.35, player.posY + 0.75, player.posZ + 0.35));
 
         player.height = 0.75f;

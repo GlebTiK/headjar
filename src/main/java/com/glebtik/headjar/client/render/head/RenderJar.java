@@ -1,4 +1,4 @@
-package com.glebtik.headjar.client;
+package com.glebtik.headjar.client.render.head;
 
 import com.glebtik.headjar.util.Color;
 import net.minecraft.client.model.ModelBase;

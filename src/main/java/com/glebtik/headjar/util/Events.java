@@ -1,9 +1,12 @@
 package com.glebtik.headjar.util;
 
 import com.glebtik.headjar.capabilities.IJarCapability;
+import com.glebtik.headjar.jars.HeadJar;
+import com.glebtik.headjar.jars.IronGolemJar;
 import com.glebtik.headjar.network.SetPlayerJarMessage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -40,13 +43,22 @@ public class Events {
         jar.getJar().doRender(player, event.getPartialRenderTick(), event.getRenderer());
 
     }
-
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         IJar jar = player.getCapability(JAR, null).getJar();
 
         jar.updateHitbox(player);
+
+        if(player instanceof EntityPlayerMP) {
+            if(player.getCapability(JAR, null).getJar() instanceof HeadJar) {
+                if (player.world.getBlockState(player.getPosition().down()).getBlock() == Blocks.IRON_BLOCK) {
+                    player.world.setBlockState(player.getPosition().down(), Blocks.AIR.getDefaultState());
+                    HeadJar oldJar =(HeadJar) player.getCapability(JAR, null).getJar();
+                    player.getCapability(JAR, null).setJar(new IronGolemJar(oldJar));
+                }
+            }
+        }
     }
 
     @SubscribeEvent

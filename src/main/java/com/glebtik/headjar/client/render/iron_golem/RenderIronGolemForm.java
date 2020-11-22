@@ -1,6 +1,5 @@
 package com.glebtik.headjar.client.render.iron_golem;
 
-import net.minecraft.client.model.ModelIronGolem;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,11 +9,17 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;
 
 public class RenderIronGolemForm extends RenderLivingBase<EntityLivingBase> {
+
+
     private static final ResourceLocation IRON_GOLEM_TEXTURES = new ResourceLocation("textures/entity/iron_golem.png");
 
     public RenderIronGolemForm(RenderManager renderManagerIn) {
-        super(renderManagerIn, new ModelIronGolem(), 0.5f);
+        super(renderManagerIn, new ModelIronGolemForm(), 0.5f);
+    }
 
+    @Override
+    public void doRender(EntityLivingBase entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
     @Override

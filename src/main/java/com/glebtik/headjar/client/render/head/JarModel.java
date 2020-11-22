@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 
 
 public class JarModel extends ModelBase {
-	private final ModelRenderer bb_main;
+	public final ModelRenderer bb_main;
 
 	public JarModel() {
 		textureWidth = 64;

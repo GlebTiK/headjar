@@ -1,21 +1,36 @@
 package com.glebtik.headjar.jars;
 
+import com.glebtik.headjar.client.render.head.HeadModel;
+import com.glebtik.headjar.client.render.head.JarModel;
+import com.glebtik.headjar.client.render.iron_golem.RenderIronGolemForm;
+import com.glebtik.headjar.util.RenderUtils;
 import com.glebtik.headjar.util.Reference;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelIronGolem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 public class IronGolemJar extends HeadJar {
-    public(HeadJar oldJar) {
-        this.
+    public IronGolemJar() {
+        headXOff = 0;
+        headZOff = 0;
+        headYOff = 0.1f;
     }
+    RenderIronGolemForm form = new RenderIronGolemForm(Minecraft.getMinecraft().getRenderManager());
 
     @Override
     public void doRender(EntityPlayer player, float partialRenderTick, RenderPlayer playerRenderer) {
         super.doRender(player, partialRenderTick, playerRenderer);
+        EntityIronGolem ironGolem = new EntityIronGolem(player.world);
+        RenderUtils.cloneValues(player, ironGolem);
 
+        RenderUtils.cloneRenderValues(((ModelIronGolem)form.getMainModel()).ironGolemHead, ((JarModel)rendererJar.getMainModel()).bb_main);
+        RenderUtils.cloneRenderValues(((ModelIronGolem)form.getMainModel()).ironGolemHead, ((HeadModel)rendererHead.getMainModel()).bb_main);
+        form.doRender(ironGolem, renderXOff, renderYOff, renderZOff, player.getRotationYawHead(),partialRenderTick);
 
     }
 
@@ -45,7 +60,22 @@ public class IronGolemJar extends HeadJar {
     }
 
     @Override
-    public void updateHitbox(EntityPlayer player) {
-        super.updateHitbox(player);
+    public float getEyeHeight() {
+        return 2.45f;
+    }
+
+    @Override
+    public float getHeight() {
+        return 2.7f;
+    }
+
+    @Override
+    public float getWidth() {
+        return 2.45f;
+    }
+
+    @Override
+    public boolean canModify() {
+        return false;
     }
 }

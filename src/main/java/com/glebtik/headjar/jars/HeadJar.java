@@ -1,7 +1,7 @@
 package com.glebtik.headjar.jars;
 
-import com.glebtik.headjar.client.RenderHead;
-import com.glebtik.headjar.client.RenderJar;
+import com.glebtik.headjar.client.render.head.RenderHead;
+import com.glebtik.headjar.client.render.head.RenderJar;
 import com.glebtik.headjar.network.MessageBufferUtils;
 import com.glebtik.headjar.util.Color;
 import com.glebtik.headjar.util.Reference;
@@ -16,14 +16,24 @@ import net.minecraft.util.math.AxisAlignedBB;
 
 public class HeadJar implements IJar {
 
-    private final RenderJar rendererJar = new RenderJar(Minecraft.getMinecraft().getRenderManager());
-    private RenderHead rendererHead = new RenderHead(Minecraft.getMinecraft().getRenderManager());
+    protected final RenderJar rendererJar = new RenderJar(Minecraft.getMinecraft().getRenderManager());
+    protected RenderHead rendererHead = new RenderHead(Minecraft.getMinecraft().getRenderManager());
     private Color color = Color.BLANK;
+
+    protected float headXOff;
+    protected float headYOff;
+    protected float headZOff;
+
+    protected double renderXOff;
+    protected double renderYOff;
+    protected double renderZOff;
 
     public void setColor(Color color) {
         this.color = color;
     }
-
+    public Color getColor() {
+        return color;
+    }
     @Override
     public boolean shouldRenderPlayer() {
         return false;
@@ -31,21 +41,26 @@ public class HeadJar implements IJar {
 
     @Override
     public void doRender(EntityPlayer player, float partialRenderTick, RenderPlayer playerRenderer) {
-        double x = player.posX - Minecraft.getMinecraft().player.posX;
-        double y = player.posY - Minecraft.getMinecraft().player.posY;
-        double z = player.posZ - Minecraft.getMinecraft().player.posZ;
-
+        updateRenderOffset(player, partialRenderTick);
         rendererHead.setEntityTexture(playerRenderer.getEntityTexture((AbstractClientPlayer) player));
 
         if (!player.isRiding()) {
-            rendererHead.doRender(player, x, y, z, player.getRotationYawHead(), partialRenderTick);
-            rendererJar.doRender(player, x, y, z, player.getRotationYawHead(), partialRenderTick, color);
+            rendererHead.doRender(player, headXOff + renderXOff, headYOff + renderYOff, headZOff + renderZOff, player.getRotationYawHead(), partialRenderTick);
+            rendererJar.doRender(player, headXOff + renderXOff, headYOff + renderYOff, headZOff + renderZOff, player.getRotationYawHead(), partialRenderTick, color);
         } else {
-            rendererJar.doRender(player, x, y + 0.5, z, 0, partialRenderTick, color);
-            rendererHead.doRender(player, x, y + 0.5, z, player.getRotationYawHead(), partialRenderTick);
+            rendererJar.doRender(player, headXOff + renderXOff, headYOff + renderYOff + 0.5, headZOff + renderZOff, 0, partialRenderTick, color);
+            rendererHead.doRender(player, headXOff + renderXOff, headYOff + renderYOff + 0.5, headZOff + renderZOff, player.getRotationYawHead(), partialRenderTick);
         }
     }
+    private void updateRenderOffset(EntityPlayer player, float partialRenderTick) {
+        renderXOff = getPartialValue(partialRenderTick, player.posX, player.prevPosX) - getPartialValue(partialRenderTick, Minecraft.getMinecraft().player.posX, Minecraft.getMinecraft().player.prevPosX);
+        renderYOff = getPartialValue(partialRenderTick, player.posY, player.prevPosY) - getPartialValue(partialRenderTick, Minecraft.getMinecraft().player.posY, Minecraft.getMinecraft().player.prevPosY);
+        renderZOff = getPartialValue(partialRenderTick, player.posZ, player.prevPosZ) - getPartialValue(partialRenderTick, Minecraft.getMinecraft().player.posZ, Minecraft.getMinecraft().player.prevPosZ);
 
+    }
+    private double getPartialValue(float partialRenderTick, double newValue, double oldValue) {
+        return newValue*partialRenderTick + oldValue*(1-partialRenderTick);
+    }
     @Override
     public void writeNBT(NBTTagCompound nbt) {
         nbt.setInteger("jarcolor", color.colorValue);
@@ -79,17 +94,20 @@ public class HeadJar implements IJar {
     }
 
     @Override
-    public void updateHitbox(EntityPlayer player) {
+    public float getHeight() {
+        return 0.75f;
+    }
 
-        player.setEntityBoundingBox(new AxisAlignedBB(player.posX - 0.35, player.posY, player.posZ - 0.35, player.posX + 0.35, player.posY + 0.75, player.posZ + 0.35));
+    @Override
+    public float getWidth() {
+        return 0.7f;
+    }
 
-        player.height = 0.75f;
-        player.width = 0.7f;
-        player.eyeHeight = 0.5f;
-        if(player.isRiding()) {
-            player.height = 1.23f;
-            player.eyeHeight = 0.75f;
-        }
-
+    @Override
+    public float getEyeHeight() {
+        return 0.5f;
+    }
+    public boolean canModify() {
+        return true;
     }
 }

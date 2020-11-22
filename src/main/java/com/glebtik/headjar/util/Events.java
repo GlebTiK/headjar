@@ -48,14 +48,21 @@ public class Events {
         EntityPlayer player = event.player;
         IJar jar = player.getCapability(JAR, null).getJar();
 
-        jar.updateHitbox(player);
+        jar.updateHitBox(player);
 
         if(player instanceof EntityPlayerMP) {
-            if(player.getCapability(JAR, null).getJar() instanceof HeadJar) {
-                if (player.world.getBlockState(player.getPosition().down()).getBlock() == Blocks.IRON_BLOCK) {
-                    player.world.setBlockState(player.getPosition().down(), Blocks.AIR.getDefaultState());
-                    HeadJar oldJar =(HeadJar) player.getCapability(JAR, null).getJar();
-                    player.getCapability(JAR, null).setJar(new IronGolemJar(oldJar));
+            if(jar instanceof HeadJar) {
+                HeadJar headJar = (HeadJar) player.getCapability(JAR, null).getJar();
+                if(headJar.canModify()) {
+                    if (player.world.getBlockState(player.getPosition().down()).getBlock() == Blocks.IRON_BLOCK) {
+                        player.world.setBlockState(player.getPosition().down(), Blocks.AIR.getDefaultState());
+                        HeadJar oldJar = (HeadJar) player.getCapability(JAR, null).getJar();
+                        IronGolemJar newJar = new IronGolemJar();
+                        newJar.setColor(oldJar.getColor());
+                        player.getCapability(JAR, null).setJar(newJar);
+                        SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) player);
+                        PacketHandler.INSTANCE.sendToAll(message);
+                    }
                 }
             }
         }

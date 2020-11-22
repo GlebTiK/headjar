@@ -47,10 +47,17 @@ public class NoJar implements IJar {
     }
 
     @Override
-    public void updateHitbox(EntityPlayer player) {
-        player.height = 1.8f;
-        player.width = 0.6f;
-        player.eyeHeight = 1.62f;
-        player.setEntityBoundingBox(new AxisAlignedBB(player.posX - 0.3, player.posY, player.posZ - 0.3, player.posX + 0.3, player.posY + 1.8, player.posZ + 0.3));
+    public float getWidth() {
+        return 0.6f;
+    }
+
+    @Override
+    public float getHeight() {
+        return 1.8f;
+    }
+
+    @Override
+    public float getEyeHeight() {
+        return 1.62f;
     }
 }

@@ -9,19 +9,24 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelIronGolem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import javax.swing.text.JTextComponent;
 
 public class IronGolemJar extends HeadJar {
+
+    RenderIronGolemForm form = new RenderIronGolemForm(Minecraft.getMinecraft().getRenderManager());
+
     public IronGolemJar() {
         headXOff = 0;
         headZOff = 0;
         headYOff = 0.1f;
     }
-    RenderIronGolemForm form = new RenderIronGolemForm(Minecraft.getMinecraft().getRenderManager());
-
     @Override
     public void doRender(EntityPlayer player, float partialRenderTick, RenderPlayer playerRenderer) {
         super.doRender(player, partialRenderTick, playerRenderer);
@@ -31,7 +36,15 @@ public class IronGolemJar extends HeadJar {
         RenderUtils.cloneRenderValues(((ModelIronGolem)form.getMainModel()).ironGolemHead, ((JarModel)rendererJar.getMainModel()).bb_main);
         RenderUtils.cloneRenderValues(((ModelIronGolem)form.getMainModel()).ironGolemHead, ((HeadModel)rendererHead.getMainModel()).bb_main);
         form.doRender(ironGolem, renderXOff, renderYOff, renderZOff, player.getRotationYawHead(),partialRenderTick);
+    }
 
+    @Override
+    public void serverTick(TickEvent.PlayerTickEvent event) {
+        event.player.setSprinting(false);
+    }
+    public void clientTick(TickEvent.PlayerTickEvent event) {
+        event.player.setSprinting(false);
+        KeyBinding.setKeyBindState(Minecraft.getMinecraft().gameSettings.keyBindSprint.getKeyCode(), false);
     }
 
     @Override

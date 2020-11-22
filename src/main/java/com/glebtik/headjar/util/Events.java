@@ -4,6 +4,7 @@ import com.glebtik.headjar.capabilities.IJarCapability;
 import com.glebtik.headjar.jars.HeadJar;
 import com.glebtik.headjar.jars.IronGolemJar;
 import com.glebtik.headjar.network.SetPlayerJarMessage;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -49,6 +50,14 @@ public class Events {
         IJar jar = player.getCapability(JAR, null).getJar();
 
         jar.updateHitBox(player);
+
+        if(player instanceof EntityPlayerMP) {
+            jar.serverTick(event);
+        }else{
+            if(event.player == Minecraft.getMinecraft().player) {
+                jar.clientTick(event);
+            }
+        }
 
         if(player instanceof EntityPlayerMP) {
             if(jar instanceof HeadJar) {

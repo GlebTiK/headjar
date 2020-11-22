@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public interface IJar {
     boolean shouldRenderPlayer();
@@ -18,7 +19,8 @@ public interface IJar {
     float getHeight();
     float getWidth();
     float getEyeHeight();
-
+    default void clientTick(TickEvent.PlayerTickEvent event) {}
+    default void serverTick(TickEvent.PlayerTickEvent event) {}
     default void updateHitBox(EntityPlayer player) {
         player.setEntityBoundingBox( new AxisAlignedBB(player.posX-getWidth()/2, player.posY, player.posZ-getWidth()/2, player.posX+getWidth()/2, player.posY+getHeight(), player.posZ+getWidth()/2));
         player.height = getHeight();
@@ -27,5 +29,6 @@ public interface IJar {
         if(player.isRiding()) {
             player.height = player.height + 0.48f;
             player.eyeHeight = player.eyeHeight + 0.25f;
-        }}
+        }
+    }
 }

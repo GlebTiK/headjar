@@ -4,6 +4,7 @@ import com.glebtik.headjar.jars.IJar;
 import com.glebtik.headjar.jars.HeadJar;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -13,10 +14,12 @@ import java.util.UUID;
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;
 
 public class SetPlayerJarMessage extends AbstractMessage<SetPlayerJarMessage> {
-    //represent MessageType1 in Old System
+
     private IJar jar;
     private UUID uuid;
-    public SetPlayerJarMessage() {}
+    public SetPlayerJarMessage() {
+
+    }
     private SetPlayerJarMessage(IJar jar, UUID uuid) {
         this.jar = jar;
         this.uuid = uuid;
@@ -43,8 +46,8 @@ public class SetPlayerJarMessage extends AbstractMessage<SetPlayerJarMessage> {
     protected IMessage handle(MessageContext ctx) {
         Minecraft.getMinecraft().addScheduledTask(() -> {
             try {
-                Minecraft.getMinecraft().world.getPlayerEntityByUUID(uuid).getCapability(JAR,
-                        null).setJar(jar);
+                EntityPlayer player = Minecraft.getMinecraft().world.getPlayerEntityByUUID(uuid);
+                player.getCapability(JAR,null).setJar(jar);
             } catch (IllegalStateException e) {
                 System.out.println("ERROR: Capability was not attached to client player");
                 e.printStackTrace();

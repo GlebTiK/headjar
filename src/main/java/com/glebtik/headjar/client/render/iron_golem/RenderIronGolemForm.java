@@ -10,11 +10,11 @@ import javax.annotation.Nullable;
 
 public class RenderIronGolemForm extends RenderLivingBase<EntityLivingBase> {
 
-
     private static final ResourceLocation IRON_GOLEM_TEXTURES = new ResourceLocation("textures/entity/iron_golem.png");
 
     public RenderIronGolemForm(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelIronGolemForm(), 0.5f);
+
     }
 
     @Override

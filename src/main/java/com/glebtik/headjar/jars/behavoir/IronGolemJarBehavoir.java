@@ -1,4 +1,4 @@
-package com.glebtik.headjar.spawn;
+package com.glebtik.headjar.jars.behavoir;
 
 import com.glebtik.headjar.jars.HeadJar;
 import com.glebtik.headjar.jars.IJar;
@@ -12,10 +12,12 @@ import net.minecraft.block.state.pattern.BlockMaterialMatcher;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.block.state.pattern.FactoryBlockPattern;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -23,7 +25,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-public class GolemSpawner {
+public class IronGolemJarBehavoir {
     private static FactoryBlockPattern golem = FactoryBlockPattern.start().aisle("###", "~#~").where('#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)));
 
     @SubscribeEvent
@@ -53,4 +55,24 @@ public class GolemSpawner {
             }
         }
     }
+
+    @SubscribeEvent
+    public static void onDamage(LivingHurtEvent event) {
+        if(event.getEntityLiving() instanceof EntityPlayerMP) {
+            EntityPlayerMP player = (EntityPlayerMP) event.getEntityLiving();
+            IJar jar = player.getCapability(JAR, null).getJar();
+            if(jar instanceof IronGolemJar) {
+                if(event.getSource() == DamageSource.FALL) {
+                    event.setCanceled(true);
+                    return;
+                }
+                if(event.getSource() == DamageSource.DROWN) {
+                    event.setCanceled(true);
+                    return;
+                }
+            }
+        }
+    }
+
+
 }

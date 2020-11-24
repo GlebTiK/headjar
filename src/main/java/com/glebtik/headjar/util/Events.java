@@ -1,9 +1,13 @@
 package com.glebtik.headjar.util;
 
 import com.glebtik.headjar.capabilities.IJarCapability;
+import com.glebtik.headjar.jars.HeadJar;
+import com.glebtik.headjar.jars.IronGolemJar;
 import com.glebtik.headjar.network.SetPlayerJarMessage;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -40,13 +44,20 @@ public class Events {
         jar.getJar().doRender(player, event.getPartialRenderTick(), event.getRenderer());
 
     }
-
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         IJar jar = player.getCapability(JAR, null).getJar();
 
-        jar.updateHitbox(player);
+        jar.updateHitBox(player);
+
+        if(player instanceof EntityPlayerMP) {
+            jar.serverTick(event);
+        }else{
+            if(event.player == Minecraft.getMinecraft().player) {
+                jar.clientTick(event);
+            }
+        }
     }
 
     @SubscribeEvent

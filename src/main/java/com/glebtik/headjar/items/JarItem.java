@@ -42,10 +42,12 @@ public class JarItem extends Item {
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
         if(!worldIn.isRemote){
             if(playerIn.getCapability(JAR, null).getJar() instanceof HeadJar){
-                playerIn.getCapability(JAR, null).setJar(new NoJar());
+                NoJar newJar = new NoJar();
+                playerIn.getCapability(JAR, null).setJar(newJar);
 
                 SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) playerIn);
                 PacketHandler.INSTANCE.sendToAll(message);
+
                 return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
             }
             if(playerIn.getCapability(JAR, null).getJar() instanceof NoJar){
@@ -54,8 +56,8 @@ public class JarItem extends Item {
                 playerIn.getCapability(JAR, null).setJar(jar);
 
                 SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) playerIn);
-
                 PacketHandler.INSTANCE.sendToAll(message);
+
                 return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
             }
             return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);

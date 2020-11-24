@@ -1,4 +1,4 @@
-package com.glebtik.headjar.client;
+package com.glebtik.headjar.client.render.head;
 
 // Made with Blockbench 3.6.6
 // Exported for Minecraft version 1.12
@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 
 
 public class JarModel extends ModelBase {
-	private final ModelRenderer bb_main;
+	public final ModelRenderer bb_main;
 
 	public JarModel() {
 		textureWidth = 64;

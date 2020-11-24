@@ -31,4 +31,6 @@ public interface IJar {
             player.eyeHeight = player.eyeHeight + 0.25f;
         }
     }
+    default void onRemove() {
+    }
 }

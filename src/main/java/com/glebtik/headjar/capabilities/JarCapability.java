@@ -12,6 +12,9 @@ public class JarCapability implements IJarCapability{
     }
 
     public void setJar(IJar jar) {
+        if(this.jar != null) {
+            this.jar.onRemove();
+        }
         this.jar = jar;
     }
 }

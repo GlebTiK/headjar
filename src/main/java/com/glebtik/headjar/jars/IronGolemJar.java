@@ -21,7 +21,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class IronGolemJar extends HeadJar {
 
     RenderIronGolemForm form = new RenderIronGolemForm(Minecraft.getMinecraft().getRenderManager());
-
+    float oldStepHeight;
+    EntityPlayer player;
     public IronGolemJar() {
         headXOff = 0;
         headZOff = 0;
@@ -40,11 +41,32 @@ public class IronGolemJar extends HeadJar {
 
     @Override
     public void serverTick(TickEvent.PlayerTickEvent event) {
+        if(player == null) {
+            player = event.player;
+            oldStepHeight = player.stepHeight;
+            player.stepHeight = 1f;
+        }
+
+        if(event.player.isCreative() || event.player.isSpectator()) {
+            return;
+        }
         event.player.setSprinting(false);
     }
     public void clientTick(TickEvent.PlayerTickEvent event) {
+        if(player == null) {
+            player = event.player;
+            oldStepHeight = player.stepHeight;
+            player.stepHeight = 1f;
+        }
+        if(event.player.isCreative() || event.player.isSpectator()) {
+            return;
+        }
         event.player.setSprinting(false);
         KeyBinding.setKeyBindState(Minecraft.getMinecraft().gameSettings.keyBindSprint.getKeyCode(), false);
+        if(!event.player.onGround && !event.player.isOnLadder()) {
+            KeyBinding.setKeyBindState(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode(), false);
+        }
+
     }
 
     @Override
@@ -90,5 +112,12 @@ public class IronGolemJar extends HeadJar {
     @Override
     public boolean canModify() {
         return false;
+    }
+
+    @Override
+    public void onRemove() {
+        if(player != null) {
+            player.stepHeight = oldStepHeight;
+        }
     }
 }

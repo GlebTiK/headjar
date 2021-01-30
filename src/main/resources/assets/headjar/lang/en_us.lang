@@ -15,3 +15,6 @@ item.brown_jar.name=Brown Jar
 item.green_jar.name=Green Jar
 item.red_jar.name=Red Jar
 item.black_jar.name=Black Jar
+item.jar_protection.name=Jar Protection
+item.jar_water_prot.name=Jar Water Protection
+item.jar_fire_prot.name=Jar Fire Protection

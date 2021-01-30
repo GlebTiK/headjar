@@ -3,8 +3,6 @@ package com.glebtik.headjar.capabilities;
 import com.glebtik.headjar.jars.IJar;
 import com.glebtik.headjar.jars.JarRegistry;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTPrimitive;
-import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;

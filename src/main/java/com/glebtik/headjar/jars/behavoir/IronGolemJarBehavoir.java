@@ -16,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -35,7 +34,7 @@ public class IronGolemJarBehavoir {
             IJar jar = player.getCapability(JAR, null).getJar();
             if(jar instanceof HeadJar) {
                 HeadJar headJar = (HeadJar) player.getCapability(JAR, null).getJar();
-                if(headJar.canModify()) {
+                if(headJar.canModify() && headJar.getAbility("transform")) {
                     BlockPattern pattern = golem.build();
                     BlockPattern.PatternHelper patternHelper = pattern.match(player.world, new BlockPos(player.posX, player.posY-1, player.posZ));
                     if(patternHelper != null){
@@ -45,6 +44,7 @@ public class IronGolemJarBehavoir {
                                 HeadJar oldJar = (HeadJar) player.getCapability(JAR, null).getJar();
                                 IronGolemJar newJar = new IronGolemJar();
                                 newJar.setColor(oldJar.getColor());
+                                oldJar.getAbils().forEach((name, bool) -> newJar.setAbility(name, bool));
                                 player.getCapability(JAR, null).setJar(newJar);
                                 SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) player);
                                 PacketHandler.INSTANCE.sendToAll(message);

@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "headjar:items/jar_water_prot"
+    }
+}

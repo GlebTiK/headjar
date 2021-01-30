@@ -1,7 +1,6 @@
 package com.glebtik.headjar.network;
 
 import com.glebtik.headjar.jars.IJar;
-import com.glebtik.headjar.jars.HeadJar;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

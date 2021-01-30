@@ -1,5 +1,6 @@
 package com.glebtik.headjar.capabilities;
 
+
 import com.glebtik.headjar.jars.IJar;
 import com.glebtik.headjar.jars.NoJar;
 

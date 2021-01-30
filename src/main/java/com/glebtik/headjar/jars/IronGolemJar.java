@@ -7,8 +7,6 @@ import com.glebtik.headjar.util.RenderUtils;
 import com.glebtik.headjar.util.Reference;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelIronGolem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.settings.KeyBinding;

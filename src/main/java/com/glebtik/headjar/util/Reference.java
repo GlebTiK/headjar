@@ -8,4 +8,6 @@ public class Reference {
 
     public static final String CLIENT_PROXY_CLASS = "com.glebtik.headjar.proxy.ClientProxy";
     public static final String COMMON_PROXY_CLASS = "com.glebtik.headjar.proxy.CommonProxy";
+
+    public static final int HEADLESS_ZOMBIE = 120; 
 }

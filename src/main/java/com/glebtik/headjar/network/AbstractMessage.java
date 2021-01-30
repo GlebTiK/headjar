@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public abstract class AbstractMessage<THIS extends AbstractMessage> implements IMessage, IMessageHandler<THIS, IMessage> {
+public abstract class AbstractMessage<THIS extends AbstractMessage<THIS>> implements IMessage, IMessageHandler<THIS, IMessage> {
     abstract protected boolean validate();
 
     @Override

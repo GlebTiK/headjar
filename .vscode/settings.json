@@ -1,3 +1,16 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "java.home": "C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.9.101-hotspot",
+    "java.configuration.runtimes": [
+        {
+          "default": true,
+          "name": "JavaSE-1.8",
+          "path": "C:\\Program Files\\OpenJDK\\jdk-8.0.262.10-hotspot"
+        },
+        {
+          "name": "JavaSE-11",
+          "path": "C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.9.101-hotspot",
+        }
+      ],
+      "discord.enabled": true
 }

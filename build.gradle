@@ -11,10 +11,12 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "v0.0.2-beta"
+version = "v0.1.0-beta"
 group = "com.glebtik.headjar" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "headjar"
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'

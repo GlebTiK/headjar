@@ -4,14 +4,17 @@ import com.glebtik.headjar.capabilities.IJarCapability;
 import com.glebtik.headjar.capabilities.JarCapability;
 import com.glebtik.headjar.jars.JarRegistry;
 import com.glebtik.headjar.capabilities.Storage;
+import com.glebtik.headjar.register.EntityInit;
+// import com.glebtik.headjar.register.BlockInit;
 import com.glebtik.headjar.register.ItemInit;
+import com.glebtik.headjar.register.PotionInit;
+import com.glebtik.headjar.register.RenderInit;
 import com.glebtik.headjar.jars.behavoir.IronGolemJarBehavoir;
 import com.glebtik.headjar.util.Events;
 import com.glebtik.headjar.network.PacketHandler;
 import com.glebtik.headjar.util.Reference;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -40,8 +43,12 @@ public class HeadInAJar {
         MinecraftForge.EVENT_BUS.register(new Events());
         MinecraftForge.EVENT_BUS.register(IronGolemJarBehavoir.class);
         MinecraftForge.EVENT_BUS.register(ItemInit.class);
-        Loader.instance().getActiveModList().get(0).getMod();
+        // MinecraftForge.EVENT_BUS.register(BlockInit.class);
+        //Loader.instance().getActiveModList().get(0).getMod();
         JarRegistry.registerOwn();
+        EntityInit.RegisterEntities();
+        RenderInit.registerEntityRenders();
+        PotionInit.regsiterPotions();
     }
 
     @Mod.EventHandler

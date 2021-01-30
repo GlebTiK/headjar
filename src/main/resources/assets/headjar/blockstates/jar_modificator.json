@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": { 
+            "model": "headjar:jar_modificator" 
+        }
+    }
+}

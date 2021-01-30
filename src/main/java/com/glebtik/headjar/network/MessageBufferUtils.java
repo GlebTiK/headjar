@@ -1,12 +1,14 @@
 package com.glebtik.headjar.network;
 
 import com.glebtik.headjar.jars.IJar;
-import com.glebtik.headjar.jars.HeadJar;
 import com.glebtik.headjar.jars.JarRegistry;
 import com.glebtik.headjar.util.Color;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.ResourceLocation;
 
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class MessageBufferUtils {
@@ -58,5 +60,20 @@ public class MessageBufferUtils {
             }
         }
         return Color.BLANK;
+    }
+
+    public static void writeAbility(ByteBuf buf, String a, boolean ab) {
+        buf.writeInt(a.length());
+        buf.writeCharSequence(a, StandardCharsets.UTF_8);
+        buf.writeBoolean(ab);
+    }
+    
+    public static HashMap<String, Boolean> readAbility(ByteBuf buf) {
+        int l = buf.readInt();
+        String a = buf.readCharSequence(l, StandardCharsets.UTF_8).toString();
+        boolean ab = buf.readBoolean();
+        Map<String, Boolean> abil = new HashMap<String, Boolean>();
+        abil.put(a,ab);
+        return (HashMap<String, Boolean>) abil;//
     }
 }

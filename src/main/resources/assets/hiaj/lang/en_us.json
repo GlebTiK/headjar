@@ -1,0 +1,22 @@
+{
+"item.hiaj.jar": "Jar",
+"item.hiaj.white_jar": "White Jar",
+"item.hiaj.orange_jar": "Orange Jar",
+"item.hiaj.magenta_jar": "Magenta Jar",
+"item.hiaj.light_blue_jar": "Light Blue Jar",
+"item.hiaj.yellow_jar": "Yellow Jar",
+"item.hiaj.lime_jar": "Lime Jar",
+"item.hiaj.pink_jar": "Pink Jar",
+"item.hiaj.gray_jar": "Gray Jar",
+"item.hiaj.light_gray_jar": "Light Gray Jar",
+"item.hiaj.cyan_jar": "Cyan Jar",
+"item.hiaj.purple_jar": "Purple Jar",
+"item.hiaj.blue_jar": "Blue Jar",
+"item.hiaj.brown_jar": "Brown Jar",
+"item.hiaj.green_jar": "Green Jar",
+"item.hiaj.red_jar": "Red Jar",
+"item.hiaj.black_jar": "Black Jar",
+"item.hiaj.jar_modif_walk": "Jar Modification: Walking ability",
+"item.hiaj.jar_modif_extra_inv": "Jar Modification: Extra inventory",
+"item.hiaj.jar_modif_inf_air": "Jar Modification: Infinite air"
+}

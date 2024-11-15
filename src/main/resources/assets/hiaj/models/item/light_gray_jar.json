@@ -1,0 +1,6 @@
+{
+	"parent": "hiaj:item/abstract_jar",
+	"textures": {
+		"0": "hiaj:items/light_gray_jar"
+	}
+}

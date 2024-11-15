@@ -1,0 +1,22 @@
+{
+"item.hiaj.jar": "Банка",
+"item.hiaj.white_jar": "Белая банка",
+"item.hiaj.orange_jar": "Оранжевая банка",
+"item.hiaj.magenta_jar": "Пурпурная банка",
+"item.hiaj.light_blue_jar": "Светло-синяя банка",
+"item.hiaj.yellow_jar": "Желтая банка",
+"item.hiaj.lime_jar": "Лаймовая банка",
+"item.hiaj.pink_jar": "Розовая банка",
+"item.hiaj.gray_jar": "Серая банка",
+"item.hiaj.light_gray_jar": "Светло-серая банка",
+"item.hiaj.cyan_jar": "Голубая банка",
+"item.hiaj.purple_jar": "Фиолетовая банка",
+"item.hiaj.blue_jar": "Синяя банка",
+"item.hiaj.brown_jar": "Коричневая банка",
+"item.hiaj.green_jar": "Зеленая банка",
+"item.hiaj.red_jar": "Красная банка",
+"item.hiaj.black_jar": "Черная банка",
+"item.hiaj.jar_modif_walk": "Модификация банки: Возможность хождения",
+"item.hiaj.jar_modif_extra_inv": "Модификация банки: Дополнительный инвентарь",
+"item.hiaj.jar_modif_inf_air": "Модификация банки: Бесконечный воздух"
+}

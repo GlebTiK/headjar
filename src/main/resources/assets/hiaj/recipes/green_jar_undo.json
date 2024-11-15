@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hiaj:green_jar"
+        }
+    ],
+    "result":
+    {
+        "item": "hiaj:jar",
+        "count": 1
+    }
+}

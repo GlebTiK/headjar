@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.glebtik.hiaj.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "PlayerMixin"
+  ],
+  "client": [
+    "SlotMixin",
+    "PlayerRenderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

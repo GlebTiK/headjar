@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "hiaj:items/jar_modif_inf_air"
+    }
+}

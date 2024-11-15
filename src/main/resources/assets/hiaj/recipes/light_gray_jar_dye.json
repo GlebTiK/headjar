@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+         "item": "hiaj:jar"
+        },
+        {
+            "type": "forge:ore_dict",
+            "ore": "dyeLight_gray"
+        }
+    ],
+    "result":
+    {
+        "item": "hiaj:light_gray_jar",
+        "count": 1
+    }
+}

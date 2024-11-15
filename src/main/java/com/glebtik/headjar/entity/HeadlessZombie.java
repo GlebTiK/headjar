@@ -6,7 +6,6 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;
@@ -29,7 +28,7 @@ public class HeadlessZombie extends EntityZombie {
         if (this.isPotionActive(PotionInit.TRANSFORM) && jar instanceof HeadJar) {
             HeadJar headjar = (HeadJar) jar;
             if(headjar.canModify()) {
-                headjar.setTransfrom(HeadJar.T1);
+                headjar.setTransform(HeadJar.TRANSFORM_ZOMBIE);
                 if (!player.world.isRemote) {
                     SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) player);
                     PacketHandler.INSTANCE.sendToAll(message);

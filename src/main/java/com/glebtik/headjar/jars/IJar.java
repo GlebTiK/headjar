@@ -55,8 +55,8 @@ public interface IJar {
     boolean getAbility(String a);
     void setAbility(String a, boolean b);
     Map<String, Boolean> getAbils();
-    String transform();
-    void setTransfrom(String a);
+    String getTransform();
+    void setTransform(String a);
     UUID getPlayerBodyUuid();
     void setPlayerBodyUuid(UUID a);
 }

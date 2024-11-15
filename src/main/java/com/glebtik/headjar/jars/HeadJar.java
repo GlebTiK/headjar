@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.glebtik.headjar.client.render.RenderCreeperBody;
+import com.glebtik.headjar.client.render.RenderSkeletonBody;
+import com.glebtik.headjar.client.render.RenderVillagerBody;
+import com.glebtik.headjar.client.render.RenderZombieBody;
 import com.glebtik.headjar.client.render.head.RenderHead;
 import com.glebtik.headjar.client.render.head.RenderJar;
-import com.glebtik.headjar.entity.render.RenderHeadlessZombie;
+//import com.glebtik.headjar.entity.render.RenderHeadlessZombie;
 import com.glebtik.headjar.network.MessageBufferUtils;
 import com.glebtik.headjar.util.Color;
 import com.glebtik.headjar.util.Reference;
@@ -22,6 +26,11 @@ public class HeadJar implements IJar {
 
     protected final RenderJar rendererJar = new RenderJar(Minecraft.getMinecraft().getRenderManager());
     protected RenderHead rendererHead = new RenderHead(Minecraft.getMinecraft().getRenderManager());
+    protected RenderCreeperBody renderCreeperBody = new RenderCreeperBody(Minecraft.getMinecraft().getRenderManager());
+    protected RenderSkeletonBody renderSkeletonBody = new RenderSkeletonBody(Minecraft.getMinecraft().getRenderManager());
+    protected RenderVillagerBody renderVillagerBody = new RenderVillagerBody(Minecraft.getMinecraft().getRenderManager());
+    protected RenderZombieBody renderZombieBody = new RenderZombieBody(Minecraft.getMinecraft().getRenderManager());
+
     private Color color = Color.BLANK;
 
     protected float headXOff;
@@ -36,11 +45,11 @@ public class HeadJar implements IJar {
 
     private String transform = "";
 
-    public final static String T1 = "ZOMBIE";
-    public final static String T2 = "SKELETON";
-    public final static String T3 = "CREEPER";
-    public final static String T4 = "VILLAGER";
-    public final static String T5 = "PLAYER_BODY";
+    public final static String TRANSFORM_ZOMBIE = "ZOMBIE";
+    public final static String TRANSFORM_SKELETON = "SKELETON";
+    public final static String TRANSFORM_CREEPER = "CREEPER";
+    public final static String TRANSFORM_VILLAGER = "VILLAGER";
+    public final static String TRANSFORM_PLAYER_BODY = "PLAYER_BODY";
 
     private UUID bodyUuid = null;
 
@@ -67,13 +76,18 @@ public class HeadJar implements IJar {
                     partialRenderTick, color);
             rendererHead.doRender(player, headXOff + renderXOff, headYOff + renderYOff + 0.5, headZOff + renderZOff,
                     player.getRotationYawHead(), partialRenderTick);
-        } else if (transform == T1) {
+        } else if (transform == TRANSFORM_ZOMBIE) {
+            renderZombieBody.doRender(player, headXOff + renderXOff, headYOff + renderYOff + 0.5, headZOff + renderZOff,
+            player.getRotationYawHead(), partialRenderTick);
+            rendererJar.doRender(player, headXOff + renderXOff, headYOff + renderYOff + 1.95, headZOff + renderZOff, 0,
+                    partialRenderTick, color);
+            rendererHead.doRender(player, headXOff + renderXOff, headYOff + renderYOff + 1.95, headZOff + renderZOff,
+                    player.getRotationYawHead(), partialRenderTick);
+        } else if (transform == TRANSFORM_SKELETON) {
 
-        } else if (transform == T2) {
+        } else if (transform == TRANSFORM_CREEPER) {
 
-        } else if (transform == T3) {
-
-        } else if (transform == T4) {
+        } else if (transform == TRANSFORM_VILLAGER) {
 
         } else {
             rendererHead.doRender(player, headXOff + renderXOff, headYOff + renderYOff, headZOff + renderZOff,
@@ -106,6 +120,7 @@ public class HeadJar implements IJar {
         nbt.setBoolean("prot", getAbility("prot"));
         nbt.setBoolean("water", getAbility("water"));
         nbt.setBoolean("transform", getAbility("transform"));
+        nbt.setString("transform_body", getTransform());
     }
 
     @Override
@@ -115,6 +130,7 @@ public class HeadJar implements IJar {
         setAbility("prot", nbt.getBoolean("prot"));
         setAbility("water", nbt.getBoolean("water"));
         setAbility("transform", nbt.getBoolean("transform"));
+        setTransform(nbt.getString("transform_body"));
         for (Color c : Color.values()) {
             if (c.colorValue == colorValue) {
                 setColor(c);
@@ -147,9 +163,9 @@ public class HeadJar implements IJar {
 
     @Override
     public float getHeight() {
-        if (transform != "")
+        /*if (transform != "")
             return 1.95f;
-        else
+        else*/
             return 0.75f;
     }
 
@@ -183,18 +199,18 @@ public class HeadJar implements IJar {
     }
 
     @Override
-    public String transform() {
+    public String getTransform() {
         return transform;
     }
 
     @Override
-    public void setTransfrom(String a) {
+    public void setTransform(String a) {
         transform = a;
     }
 
     @Override
     public UUID getPlayerBodyUuid() {
-        if (transform() == T5)
+        if (getTransform() == TRANSFORM_PLAYER_BODY)
             return this.bodyUuid;
         else
             return null;
@@ -202,7 +218,7 @@ public class HeadJar implements IJar {
 
     @Override
     public void setPlayerBodyUuid(UUID a) {
-        if (transform() == T5) {
+        if (getTransform() == TRANSFORM_PLAYER_BODY) {
             this.bodyUuid = a;
         }
     }

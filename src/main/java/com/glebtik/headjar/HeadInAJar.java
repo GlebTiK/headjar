@@ -43,7 +43,7 @@ public class HeadInAJar {
         MinecraftForge.EVENT_BUS.register(new Events());
         MinecraftForge.EVENT_BUS.register(IronGolemJarBehavoir.class);
         MinecraftForge.EVENT_BUS.register(ItemInit.class);
-        // MinecraftForge.EVENT_BUS.register(BlockInit.class);
+        //MinecraftForge.EVENT_BUS.register(BlockInit.class);
         //Loader.instance().getActiveModList().get(0).getMod();
         JarRegistry.registerOwn();
         EntityInit.RegisterEntities();

@@ -1,4 +1,4 @@
-package com.glebtik.headjar.items;
+package com.glebtik.headjar.items.modifications;
 
 public class FireProt extends Prot {
     public FireProt() {

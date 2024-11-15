@@ -78,12 +78,12 @@ public class NoJar implements IJar {
     }
 
     @Override
-    public String transform() {
+    public String getTransform() {
         return null;
     }
 
     @Override
-    public void setTransfrom(String a) {
+    public void setTransform(String a) {
 
     }
 

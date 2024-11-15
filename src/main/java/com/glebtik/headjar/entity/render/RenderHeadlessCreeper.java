@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
+
+
 public class RenderHeadlessCreeper extends RenderLivingBase<HeadlessCreeper> {
 
     public static final ResourceLocation TEXTURES = new ResourceLocation(

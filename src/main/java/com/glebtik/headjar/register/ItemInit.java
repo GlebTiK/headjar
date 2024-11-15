@@ -1,10 +1,10 @@
 package com.glebtik.headjar.register;
 
-import com.glebtik.headjar.items.FireProt;
 import com.glebtik.headjar.items.JarItem;
-import com.glebtik.headjar.items.Prot;
-import com.glebtik.headjar.items.TransfromAbil;
-import com.glebtik.headjar.items.WaterProt;
+import com.glebtik.headjar.items.modifications.FireProt;
+import com.glebtik.headjar.items.modifications.Prot;
+import com.glebtik.headjar.items.modifications.TransfromAbil;
+import com.glebtik.headjar.items.modifications.WaterProt;
 import com.glebtik.headjar.util.Color;
 import com.glebtik.headjar.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

@@ -1,6 +1,5 @@
 {
     "java.configuration.updateBuildConfiguration": "disabled",
-    "java.home": "C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.9.101-hotspot",
     "java.configuration.runtimes": [
         {
           "default": true,
@@ -8,9 +7,11 @@
           "path": "C:\\Program Files\\OpenJDK\\jdk-8.0.262.10-hotspot"
         },
         {
-          "name": "JavaSE-11",
-          "path": "C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.9.101-hotspot",
+          "default": false,
+          "name": "JavaSE-16",
+          "path": "C:\\Program Files\\Eclipse Foundation\\jdk-16.0.2.7-hotspot"
         }
       ],
-      "discord.enabled": true
+      "discord.enabled": true,
+      "java.home": "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\"
 }

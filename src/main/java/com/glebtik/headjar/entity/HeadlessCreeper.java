@@ -26,7 +26,7 @@ public class HeadlessCreeper extends EntityCreeper {
         if (this.isPotionActive(PotionInit.TRANSFORM) && jar instanceof HeadJar) {
             HeadJar headjar = (HeadJar) jar;
             if(headjar.canModify()) {
-                headjar.setTransfrom(HeadJar.T3);
+                headjar.setTransform(HeadJar.TRANSFORM_CREEPER);
                 if (!player.world.isRemote) {
                     SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) player);
                     PacketHandler.INSTANCE.sendToAll(message);

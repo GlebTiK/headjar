@@ -1,4 +1,4 @@
-package com.glebtik.headjar.items;
+package com.glebtik.headjar.items.modifications;
 
 public class WaterProt extends Prot {
     public WaterProt() {

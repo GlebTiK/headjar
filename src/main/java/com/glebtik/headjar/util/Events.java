@@ -56,7 +56,7 @@ public class Events {
             IJar j = event.getEntityPlayer().getCapability(JAR, null).getJar();
             if(j instanceof HeadJar) {
                 HeadJar jar = (HeadJar) j;
-                if (jar.transform() == "" || jar.transform() == HeadJar.T5) {
+                if (jar.getTransform() == "" || jar.getTransform() == HeadJar.TRANSFORM_PLAYER_BODY) {
                     event.setCanceled(true);
                 }
             }

@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;
 
@@ -26,7 +25,7 @@ public class HeadlessVillager extends EntityVillager {
         if (this.isPotionActive(PotionInit.TRANSFORM) && jar instanceof HeadJar) {
             HeadJar headjar = (HeadJar) jar;
             if(headjar.canModify()) {
-                headjar.setTransfrom(HeadJar.T4);       
+                headjar.setTransform(HeadJar.TRANSFORM_VILLAGER);       
                 if (!player.world.isRemote) {
                     SetPlayerJarMessage message = SetPlayerJarMessage.create((EntityPlayerMP) player);
                     PacketHandler.INSTANCE.sendToAll(message);

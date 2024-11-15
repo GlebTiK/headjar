@@ -1,4 +1,4 @@
-package com.glebtik.headjar.items;
+package com.glebtik.headjar.items.modifications;
 
 import com.glebtik.headjar.jars.HeadJar;
 import com.glebtik.headjar.jars.IJar;
@@ -14,30 +14,24 @@ import net.minecraft.world.World;
 
 import static com.glebtik.headjar.capabilities.JarProvider.JAR;
 
-public class Prot extends Item {
-    // private ItemStack item;
-    public Prot() {
-        this("jar_protection");
+public class Template extends Item {
+    public Template() {
+        
     }
-    public Prot(String a) {
+    
+    public Template(String a) {
         this.setMaxDamage(0);
         this.setHasSubtypes(false);
         this.setMaxStackSize(1);
         this.setCreativeTab(CreativeTabs.TOOLS);
-        // item = new ItemStack(this);
 
         setUnlocalizedName(a);
         setRegistryName(a);
     }
 
-    // public ItemStack getItem() {
-    // return item;
-    // }
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
-        // if ()
         if (playerIn.getCapability(JAR, null).getJar() instanceof HeadJar) {
             if (!worldIn.isRemote) {
                 IJar jar = playerIn.getCapability(JAR, null).getJar();
@@ -55,9 +49,6 @@ public class Prot extends Item {
         } else {
             return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
         }
-        // return null;
-        // return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-        // return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
     }
     public String getAbilityName() {
         return "prot";
